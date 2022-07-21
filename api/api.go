@@ -22,7 +22,7 @@ func NewAPIRouter(atmTransaction ATMTransaction, authMiddleware Middleware) http
 
 			// Request: CodeRequest; requires a TransactionTypeQueryArg
 			// Response: VerifiedCodeResponse
-			// Throws: TransactionTypeNotProvided, InvalidCode
+			// Throws: TransactionTypeNotProvided, InvalidCode, InvalidTransactionType
 			r.Post("/verify-code", atmTransaction.VerifyCode)
 
 			// Request: BanknoteCheckRequest
