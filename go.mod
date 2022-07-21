@@ -1,4 +1,4 @@
-module github.com/k0marov/avencia-api
+module github.com/k0marov/avencia-api-contract
 
 go 1.18
 
