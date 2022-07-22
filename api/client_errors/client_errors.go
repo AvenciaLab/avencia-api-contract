@@ -35,3 +35,8 @@ var InsufficientFunds = ClientError{
 	DetailCode: "insufficient-funds",
 	HTTPCode:   400,
 }
+
+var WithdrawLimitExceeded = ClientError{
+	DetailCode: "withdraw-limit-exceeded",
+	HTTPCode: 400,
+}
