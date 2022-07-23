@@ -37,7 +37,7 @@ func NewAPIRouter(h Handlers, authMiddleware Middleware) http.Handler {
 		})
 		// Response: UserInfoResponse 
 		// Throws: 401
-		r.Get("user-info", authMiddleware(h.GetUserInfo).ServeHTTP)
+		r.Get("/user-info", authMiddleware(h.GetUserInfo).ServeHTTP)
 	})
 	
 
