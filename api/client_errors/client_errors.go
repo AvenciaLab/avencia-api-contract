@@ -45,3 +45,8 @@ var NotFound = ClientError{
 	DetailCode: "not-found", 
 	HTTPCode: 404, 
 }
+
+var NegativeTransferAmount = ClientError{
+	DetailCode: "negative-transfer-amount", 
+	HTTPCode: 400, 
+}
