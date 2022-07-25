@@ -32,14 +32,18 @@ func NewAPIRouter(h Handlers, authMiddleware Middleware) http.Handler {
 
 			// Request: FinalizeTransactionRequest
 			// Response: 200 if accepted, client error (or 500) if rejected
-			// Throws: InvalidATMSecret, InsufficientFunds
+			// Throws: InvalidATMSecret, InsufficientFunds, WithdrawLimitExceeded
 			r.Post("/finalize-transaction", h.FinalizeTransaction)
 		})
-		// Response: UserInfoResponse 
+		// Response: UserInfoResponse
 		// Throws: 401
 		r.Get("/user-info", authMiddleware(h.GetUserInfo).ServeHTTP)
+
+		// Request: TransferRequest
+		// Response: 200 if accepted, client error (or 500) if rejected
+		// Throws: 401, NotFound, NegativeTransferAmount, InsufficientFunds, WithdrawLimitExceeded
+		r.Post("/transfer", authMiddleware(h.Transfer).ServeHTTP)
 	})
-	
 
 	return r
 }
