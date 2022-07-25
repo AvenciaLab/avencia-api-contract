@@ -40,3 +40,8 @@ var WithdrawLimitExceeded = ClientError{
 	DetailCode: "withdraw-limit-exceeded",
 	HTTPCode: 400,
 }
+
+var NotFound = ClientError{
+	DetailCode: "not-found", 
+	HTTPCode: 404, 
+}
