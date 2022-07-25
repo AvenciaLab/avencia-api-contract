@@ -21,5 +21,5 @@ type FinalizeTransactionRequest struct {
 type TransferRequest struct {
 	RecipientIdentifier string `json:"recipient_identifier"` // currently it's email, maybe later it will a phone number 
 	Currency string `json:"currency"` 
-	Amount string `json:"amount"` // can only be positive for obvious reasons 
+	Amount float64 `json:"amount"` // can only be positive for obvious reasons 
 }
