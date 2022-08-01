@@ -43,6 +43,10 @@ func NewAPIRouter(h Handlers, authMiddleware Middleware) http.Handler {
 		// Response: 200 if accepted, client error (or 500) if rejected
 		// Throws: 401, NotFound, NegativeTransferAmount, InsufficientFunds, WithdrawLimitExceeded
 		r.Post("/transfer", authMiddleware(h.Transfer).ServeHTTP)
+
+		// Response: TransactionHistoryResponse 
+		// Throws: 401 
+		r.Get("/history", authMiddleware(h.GetHistory).ServeHTTP)
 	})
 
 	return r
