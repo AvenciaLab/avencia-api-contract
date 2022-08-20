@@ -55,3 +55,13 @@ var InvalidJSON = ClientError{
 	DetailCode: "invalid-json", 
 	HTTPCode: 400, 
 }
+
+var TransferringToYourself = ClientError{
+	DetailCode: "transferring-yourself", 
+	HTTPCode: 400, 
+}
+
+var TransferringZero = ClientError{
+	DetailCode: "transferring-zero", 
+	HTTPCode: 400, 
+}
