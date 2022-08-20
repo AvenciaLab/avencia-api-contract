@@ -5,48 +5,74 @@ import (
 	"net/http"
 )
 
-// TransactionTypeQueryArg Possible values: "deposit" and "withdrawal"
-const TransactionTypeQueryArg = "transaction_type"
-const TransactionTypeDeposit = "deposit"
-const TransactionTypeWithdrawal = "withdrawal"
-
-func NewAPIRouter(h Handlers, authMiddleware Middleware) http.Handler {
+func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 	r := chi.NewRouter()
 
-	r.Route("/api/v1", func(r chi.Router) {
-		r.Route("/atm-transaction", func(r chi.Router) {
-			// requires a TransactionTypeQueryArg
-			// Response: CodeResponse
-			// Throws: 401, TransactionTypeNotProvided
-			r.Get("/gen-code", authMiddleware(h.GenCode).ServeHTTP)
+	r.Route("/v1", func(r chi.Router) {
+		r.Route("/transaction", func(r chi.Router) {
+			r.Use(atmAuthMW)
 
-			// Request: CodeRequest; requires a TransactionTypeQueryArg
-			// Response: VerifiedCodeResponse
-			// Throws: TransactionTypeNotProvided, InvalidCode, InvalidTransactionType
-			r.Post("/verify-code", h.VerifyCode)
+			// Request: OnTransactionCreateRequest
+			// Response: OnTransactionCreateResponse
+			r.Post("/onCreate", h.Transaction.OnCreate)
 
-			// Request: BanknoteCheckRequest
-			// Response: 200 if accepted, client error (or 500) if rejected
-			// Throws: InvalidCode (means session-expired)
-			r.Post("/check-banknote", h.CheckBanknote)
+			// Request: No Request Body
+			// Response: No Response Body
+			r.Post("/onCancel/{transactionId}", h.Transaction.OnCancel)
 
-			// Request: FinalizeTransactionRequest
-			// Response: 200 if accepted, client error (or 500) if rejected
-			// Throws: InvalidATMSecret, InsufficientFunds, WithdrawLimitExceeded
-			r.Post("/finalize-transaction", h.FinalizeTransaction)
+			r.Route("/deposit", func(r chi.Router) {
+				// Request: BanknoteInsertionRequest
+				// Response: No Response Body
+				r.Post("/onBanknoteEscrow", h.Transaction.Deposit.OnBanknoteEscrow)
+
+				// Request: BanknoteInsertionRequest
+				// Response: No Response Body
+				r.Post("/onBanknoteAccepted", h.Transaction.Deposit.OnBanknoteAccepted)
+
+				// Request: CompleteDepositRequest
+				// Response: No Response Body
+				r.Post("/onComplete", h.Transaction.Deposit.OnComplete)
+			})
+
+			r.Route("/withdrawal", func(r chi.Router) {
+				// Request: StartWithdrawalRequest
+				// Response: No Response Body
+				r.Post("/onStart", h.Transaction.Withdrawal.OnStart)
+
+				// Request: BanknoteDispensionRequest
+				// Response: No Response Body
+				r.Post("/onPreBanknoteDispensed", h.Transaction.Withdrawal.OnPreBanknoteDispensed)
+
+				// Request: BanknoteDispensionRequest
+				// Response: No Response Body
+				r.Post("/onPostBanknoteDispensed", h.Transaction.Withdrawal.OnPostBanknoteDispensed)
+
+				// Request: CompleteWithdrawalRequest
+				// Response: No Response Body
+				r.Post("/onComplete", h.Transaction.Withdrawal.OnComplete)
+			})
+
 		})
-		// Response: UserInfoResponse
-		// Throws: 401
-		r.Get("/user-info", authMiddleware(h.GetUserInfo).ServeHTTP)
 
-		// Request: TransferRequest
-		// Response: 200 if accepted, client error (or 500) if rejected
-		// Throws: 401, NotFound, NegativeTransferAmount, InsufficientFunds, WithdrawLimitExceeded
-		r.Post("/transfer", authMiddleware(h.Transfer).ServeHTTP)
+		r.Route("/app", func(r chi.Router) {
+			r.Use(clientAuthMW) 
+			// Request: GenTransCodeRequest
+			// Response: GenTransCodeResponse
+			r.Post("/genTransactionCode", h.App.GenCode)
 
-		// Response: TransactionHistoryResponse 
-		// Throws: 401 
-		r.Get("/history", authMiddleware(h.GetHistory).ServeHTTP)
+			// Request: TransferRequest
+			// Response: 200 if accepted, client error (or 500) if rejected
+			r.Post("/transfer", h.App.Transfer)
+
+			// Request: No Request Body
+			// Response: UserInfoResponse
+			r.Get("/user-info", h.App.GetUserInfo)
+
+			// Request: No Request Body
+			// Response: TransactionHistoryResponse
+			r.Get("/history", h.App.GetUserInfo)
+		})
+
 	})
 
 	return r
