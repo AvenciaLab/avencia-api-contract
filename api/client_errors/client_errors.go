@@ -50,3 +50,8 @@ var NegativeTransferAmount = ClientError{
 	DetailCode: "negative-transfer-amount", 
 	HTTPCode: 400, 
 }
+
+var InvalidJSON = ClientError{
+	DetailCode: "invalid-json", 
+	HTTPCode: 400, 
+}
