@@ -21,14 +21,14 @@ var InvalidTransactionType = ClientError{
 	HTTPCode:   400,
 }
 
-var TransactionTypeNotProvided = ClientError{
-	DetailCode: "transaction_type-not-provided",
+var TransactionIdNotProvided = ClientError{
+	DetailCode: "transaction-id-not-provided",
 	HTTPCode:   400,
 }
 
 var InvalidATMSecret = ClientError{
 	DetailCode: "invalid-atm-secret",
-	HTTPCode:   400,
+	HTTPCode:   401,
 }
 
 var InsufficientFunds = ClientError{
