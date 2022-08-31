@@ -58,7 +58,7 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 			r.Use(clientAuthMW) 
 			// Request: GenTransCodeRequest
 			// Response: GenTransCodeResponse
-			r.Post("/genTransactionCode", h.App.GenCode)
+			r.Post("/gen-transaction-code", h.App.GenCode)
 
 			// Request: TransferRequest
 			// Response: 200 if accepted, client error (or 500) if rejected
