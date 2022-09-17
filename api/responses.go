@@ -8,10 +8,10 @@ type OnTransactionCreateResponse struct {
 
 type CustomerResponse struct {
 	Id string `json:"id"`
-	Email string `json:"email"`
-	Mobile string `json:"mobile"`
-	FirstName string `json:"firstName"`
-	LastName string `json:"lastName"`
+	Email string `json:"email,omitempty"`
+	Mobile string `json:"mobile,omitempty"`
+	FirstName string `json:"firstName,omitempty"`
+	LastName string `json:"lastName,omitempty"`
 }
 
 
