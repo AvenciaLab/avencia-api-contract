@@ -3,6 +3,15 @@ package api
 
 type OnTransactionCreateResponse struct {
 	TransactionId string `json:"transactionId"`
+	Customer CustomerResponse `json:"customer"`
+}
+
+type CustomerResponse struct {
+	Id string `json:"id"`
+	Email string `json:"email"`
+	Mobile string `json:"mobile"`
+	FirstName string `json:"firstName"`
+	LastName string `json:"lastName"`
 }
 
 
