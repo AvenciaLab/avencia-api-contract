@@ -2,6 +2,8 @@ package api
 
 import "net/http"
 
+type Endpoint = func(r chi.Router)
+
 type Handlers struct {
 	Transaction TransactionHandlers 
 	App AppHandlers
@@ -24,4 +26,5 @@ type TransactionWithdrawalHandlers struct {
 
 type AppHandlers struct {
 	GenCode, GetUserInfo, Transfer, GetHistory http.HandlerFunc
+	UserDetails Endpoint 
 }

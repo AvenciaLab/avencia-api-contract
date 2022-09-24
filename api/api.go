@@ -66,7 +66,11 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 
 			// Request: No Request Body
 			// Response: UserInfoResponse
-			r.Get("/user-info", h.App.GetUserInfo)
+			r.Route("/user", func(r chi.Router) {
+				r.Get("/", h.App.GetUserInfo)
+				// An endpoint that supports Reading and Updating a DetailedUser entity 
+				r.Route("/details", h.App.UserDetails) 
+			})
 
 			// Request: No Request Body
 			// Response: TransactionHistoryResponse
