@@ -1,5 +1,4 @@
 package api 
-import "time"
 
 type DetailedUser struct {
 	Id          string    `json:"id"`
