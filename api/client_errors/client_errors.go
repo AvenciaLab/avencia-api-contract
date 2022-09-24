@@ -26,6 +26,11 @@ var TransactionIdNotProvided = ClientError{
 	HTTPCode:   400,
 }
 
+var IdNotProvided = ClientError{
+	DisplayMessage: "ID was not provided in the url query.",
+	HTTPCode: 400, 
+}
+
 var InvalidATMSecret = ClientError{
 	DisplayMessage: "The provided ATM Authentication secret is invalid.",
 	HTTPCode:   401,
