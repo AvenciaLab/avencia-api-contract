@@ -77,3 +77,13 @@ var TransferringZero = ClientError{
 	DisplayMessage: "Transferring zero.",
 	HTTPCode:       400,
 }
+
+var InvalidFile = ClientError{
+	DisplayMessage: "The uploaded file is invalid.", 
+	HTTPCode: 400,
+}
+
+var FileTooBig = ClientError{
+	DisplayMessage: "The size of the uploaded file exceeds the limit.", 
+	HTTPCode: 400, 
+}
