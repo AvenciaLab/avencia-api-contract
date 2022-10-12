@@ -30,5 +30,10 @@ type TransactionWithdrawalHandlers struct {
 
 type AppHandlers struct {
 	GenCode, GetUserInfo, Transfer, GetHistory http.HandlerFunc
+	Kyc KycHandlers
 	UserDetails Endpoint 
+}
+
+type KycHandlers struct {
+	Passport Endpoint
 }

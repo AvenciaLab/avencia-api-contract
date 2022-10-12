@@ -70,6 +70,9 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 				r.Get("/", h.App.GetUserInfo)
 				// An endpoint that supports Reading and Updating a DetailedUser entity 
 				r.Route("/details", h.App.UserDetails) 
+				r.Route("/kyc", func(r chi.Router) {
+					r.Route("/passport", h.App.Kyc.Passport)
+				})
 			})
 
 			// Request: No Request Body
