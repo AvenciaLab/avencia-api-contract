@@ -1,12 +1,16 @@
 package api
 
 import (
-	"github.com/go-chi/chi/v5"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 	r := chi.NewRouter()
+
+	r.Use(middleware.RedirectSlashes)
 
 	r.Route("/v1", func(r chi.Router) {
 		r.Route("/transaction", func(r chi.Router) {
