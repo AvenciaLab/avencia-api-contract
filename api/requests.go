@@ -2,6 +2,7 @@ package api
 
 type GenTransCodeRequest struct {
 	TransactionType string `json:"type"`
+	WalletId string `json:"id"`
 }
 
 type OnTransactionCreateRequest struct {
