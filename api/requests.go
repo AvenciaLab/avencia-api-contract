@@ -55,3 +55,7 @@ type TransferRequest struct {
 	RecipientIdentifier string  `json:"recipient_identifier"` // currently it's email, maybe later it will be a phone number
 	Money Money `json:"money"`
 }
+
+type CreateWalletRequest struct {
+	Currency string `json:"currency"`
+}

@@ -6,6 +6,17 @@ type OnTransactionCreateResponse struct {
 	Customer CustomerResponse `json:"customer"`
 }
 
+type WalletResponse struct {
+	Id string `json:"id"`
+	OwnerId string `json:"owner_id"`
+	Currency string `json:"currency"`
+	Amount string `json:"amount"`
+}
+
+type WalletsResponse struct {
+	Wallets []WalletResponse `json:"wallets"`
+}
+
 type CustomerResponse struct {
 	Id string `json:"id"`
 	Email string `json:"email,omitempty"`

@@ -32,8 +32,13 @@ type AppHandlers struct {
 	GenCode, GetUserInfo, Transfer, GetHistory http.HandlerFunc
 	Kyc KycHandlers
 	UserDetails Endpoint 
+	Wallets WalletHandlers
 }
 
 type KycHandlers struct {
 	Passport Endpoint
+}
+
+type WalletHandlers struct {
+	GetAll, Create http.HandlerFunc 
 }

@@ -74,6 +74,12 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 				r.Get("/", h.App.GetUserInfo)
 				// An endpoint that supports Reading and Updating a DetailedUser entity 
 				r.Route("/details", h.App.UserDetails) 
+				r.Route("/wallets", func(r chi.Router) {
+					// Response: WalletsResponse
+					r.Get("/", h.App.Wallets.GetAll)
+					// Request: CreateWalletRequest
+					r.Post("/", h.App.Wallets.Create)
+				})
 				r.Route("/kyc", func(r chi.Router) {
 					r.Route("/passport", h.App.Kyc.Passport)
 				})

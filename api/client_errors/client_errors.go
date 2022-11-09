@@ -87,3 +87,8 @@ var FileTooBig = ClientError{
 	DisplayMessage: "The size of the uploaded file exceeds the limit.", 
 	HTTPCode: 400, 
 }
+
+var ProperWalletNotFound = ClientError{
+	DisplayMessage: "The user does not have a wallet with the needed currency for the transfer.", 
+	HTTPCode: 400,
+}
