@@ -10,7 +10,7 @@ type WalletResponse struct {
 	Id string `json:"id"`
 	OwnerId string `json:"owner_id"`
 	Currency string `json:"currency"`
-	Amount string `json:"amount"`
+	Amount float64 `json:"amount"`
 }
 
 type WalletsResponse struct {
