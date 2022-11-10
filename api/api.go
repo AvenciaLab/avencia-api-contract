@@ -86,7 +86,7 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 
 			// Request: No Request Body
 			// Response: TransactionHistoryResponse
-			r.Get("/history", h.App.GetUserInfo)
+			r.Get("/history", h.App.GetHistory)
 		})
 
 	})
