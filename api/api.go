@@ -59,7 +59,7 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 		})
 
 		r.Route("/app", func(r chi.Router) {
-			r.Use(clientAuthMW) 
+			r.Use(clientAuthMW)
 			// Request: GenTransCodeRequest
 			// Response: GenTransCodeResponse
 			r.Post("/gen-transaction-code", h.App.GenCode)
@@ -71,19 +71,19 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 			// Request: No Request Body
 			// Response: UserInfoResponse
 			r.Route("/user", func(r chi.Router) {
-				// An endpoint that supports Reading and Updating a DetailedUser entity 
-				r.Route("/details", h.App.UserDetails) 
-				r.Route("/wallets", func(r chi.Router) {
-					// Response: WalletsResponse
-					r.Get("/", h.App.Wallets.GetAll)
-					// Request: CreateWalletRequest
-					r.Post("/", h.App.Wallets.Create)
-				})
+				// An endpoint that supports Reading and Updating a DetailedUser entity
+				r.Route("/details", h.App.UserDetails)
 				r.Route("/kyc", func(r chi.Router) {
 					r.Route("/passport", h.App.Kyc.Passport)
 				})
 			})
 
+			r.Route("/wallets", func(r chi.Router) {
+				// Response: WalletsResponse
+				r.Get("/", h.App.Wallets.GetAll)
+				// Request: CreateWalletRequest
+				r.Post("/", h.App.Wallets.Create)
+			})
 			// Request: No Request Body
 			// Response: TransactionHistoryResponse
 			r.Get("/history", h.App.GetHistory)
