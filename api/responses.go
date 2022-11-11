@@ -9,6 +9,11 @@ type IdResponse struct {
 	Id string `json:"id"`
 }
 
+type UserInfoResponse struct {
+	Wallets WalletsResponse `json:"wallets"`
+	History TransactionHistory `json:"history"`
+}
+
 type WalletResponse struct {
 	Id       string  `json:"id"`
 	OwnerId  string  `json:"owner_id"`
