@@ -1,5 +1,9 @@
 package api
 
+type GetExchangeRatesRequest struct {
+	Currencies []string `json:"currencies"`
+}
+
 type GenTransCodeRequest struct {
 	TransactionType string `json:"type"`
 	WalletId string `json:"id"`

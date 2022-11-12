@@ -1,5 +1,9 @@
 package api
 
+
+// ExchangeRatesResponse is a map of currencies and their rates of USD/currency
+type ExchangeRatesResponse = map[string]float64 
+
 type OnTransactionCreateResponse struct {
 	TransactionId string           `json:"transactionId"`
 	Customer      CustomerResponse `json:"customer"`

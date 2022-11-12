@@ -60,6 +60,11 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 
 		r.Route("/app", func(r chi.Router) {
 			r.Use(clientAuthMW)
+			
+			// Request: ExchangeRatesRequest 
+			// Response: ExchangeRatesResponse
+			r.Get("/exchange-rates", h.App.GetExchangeRates)
+
 			// Request: GenTransCodeRequest
 			// Response: GenTransCodeResponse
 			r.Post("/gen-transaction-code", h.App.GenCode)

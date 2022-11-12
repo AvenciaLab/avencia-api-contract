@@ -29,7 +29,7 @@ type TransactionWithdrawalHandlers struct {
 }
 
 type AppHandlers struct {
-	GenCode, Transfer, GetHistory, GetUserInfo http.HandlerFunc
+	GenCode, Transfer, GetHistory, GetUserInfo, GetExchangeRates http.HandlerFunc
 	Kyc KycHandlers
 	UserDetails Endpoint 
 	Wallets WalletHandlers
