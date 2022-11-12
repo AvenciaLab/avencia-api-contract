@@ -6,15 +6,12 @@ type DetailedUser struct {
 	DisplayName string    `json:"display_name"`
 	Phone       string    `json:"phone"`
 	BirthDate   int64     `json:"birth_date"` // a Unix time that always has 0 hours, minutes and seconds
-	Address     Address   `json:"address"`
-	// Preferences Preferences
 }
 
 type Address struct {
 	Address string `json:"address"`
 	City    string `json:"city"`
 	State   string `json:"state"`
-	Nation  string `json:"nation"`
 	ZipCode string `json:"zipcode"`
 }
 

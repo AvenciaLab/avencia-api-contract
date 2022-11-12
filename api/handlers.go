@@ -32,6 +32,7 @@ type AppHandlers struct {
 	GenCode, Transfer, GetHistory, GetUserInfo, GetExchangeRates http.HandlerFunc
 	Kyc KycHandlers
 	UserDetails Endpoint 
+	Address Endpoint
 	Wallets WalletHandlers
 }
 
