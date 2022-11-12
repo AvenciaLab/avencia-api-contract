@@ -37,7 +37,7 @@ type AppHandlers struct {
 }
 
 type KycHandlers struct {
-	Passport Endpoint
+	Passport, NationalId, DrivingLicense Endpoint
 }
 
 type WalletHandlers struct {

@@ -84,6 +84,8 @@ func NewAPIRouter(h Handlers, clientAuthMW, atmAuthMW Middleware) http.Handler {
 				r.Route("/address", h.App.Address)
 				r.Route("/kyc", func(r chi.Router) {
 					r.Route("/passport", h.App.Kyc.Passport)
+					r.Route("/nationalId", h.App.Kyc.NationalId) 
+					r.Route("/drivingLicense", h.App.Kyc.DrivingLicense)
 				})
 			})
 
