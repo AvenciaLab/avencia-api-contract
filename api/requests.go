@@ -55,10 +55,10 @@ type CompleteWithdrawalRequest struct {
 }
 
 
-
 type TransferRequest struct {
 	RecipientIdentifier string  `json:"recipient_identifier"` // currently it's email, maybe later it will be a phone number
-	Money Money `json:"money"`
+	SourceWalletId string `json:"source_wallet_id"`
+	Amount float64 `json:"money"`
 }
 
 type CreateWalletRequest struct {
