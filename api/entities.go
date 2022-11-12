@@ -1,11 +1,11 @@
-package api 
+package api
 
 type DetailedUser struct {
-	Id          string    `json:"id"`
-	FullName    string    `json:"full_name"`
-	DisplayName string    `json:"display_name"`
-	Phone       string    `json:"phone"`
-	BirthDate   int64     `json:"birth_date"` // a Unix time that always has 0 hours, minutes and seconds
+	Id        string `json:"id"`
+	FullName  string `json:"full_name"`
+	LastName  string `json:"last_name"`
+	Phone     string `json:"phone"`
+	BirthDate int64  `json:"birth_date"` // a Unix time that always has 0 hours, minutes and seconds
 }
 
 type Address struct {
@@ -23,6 +23,5 @@ type Address struct {
 // type dateFormatPref string
 // const (
 // 	MonthFirstFormat dateFormatPref = "dayfirst"
-// 	DayFirstFormat   dateFormatPref = "monthfirst" 
+// 	DayFirstFormat   dateFormatPref = "monthfirst"
 // )
-
