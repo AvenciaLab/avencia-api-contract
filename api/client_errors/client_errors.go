@@ -92,3 +92,8 @@ var ProperWalletNotFound = ClientError{
 	DisplayMessage: "The user does not have a wallet with the needed currency for the transfer.", 
 	HTTPCode: 400,
 }
+
+var InvalidCurrency = ClientError{
+	DisplayMessage: "The requested currency does not match the wallet currency.", 
+	HTTPCode: 400, 
+}
